@@ -33,7 +33,6 @@ export class AuthService {
                 this.userSubject.next(user);
                 this.loggedIn.next(true);
               }
-              this.loggedIn.next(false);
               return user;
           }));
   }

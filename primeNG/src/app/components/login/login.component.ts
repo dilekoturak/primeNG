@@ -17,7 +17,12 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, 
               private authService: AuthService,
-              private router: Router) {}
+              private router: Router) {
+                const user = this.authService.userValue;
+                if (user) {
+                  this.router.navigate(['/dashboard']);
+                }
+              }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -42,18 +47,12 @@ export class LoginComponent implements OnInit {
     const email: string = this.f['email'].value;
     const password: string =  this.f['password'].value;
       
-    this.authService.login(email, password)
+    this.authService.login(fullname, email, password)
         .pipe(first())
         .subscribe({
             next: (data) => {
-                const user: User = {
-                  fullname: fullname,
-                  email: data.email
-                }
-                localStorage.setItem('user', JSON.stringify(user));
-                setTimeout(() => {
-                  this.router.navigate(['/dashboard']);
-                }, 1000);
+                localStorage.setItem('user', JSON.stringify(data));
+                this.router.navigate(['/dashboard']);
             },
             error: error => {
 

@@ -1,6 +1,7 @@
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -9,11 +10,23 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  isLoggedIn: Observable<boolean> | undefined;
+  loggedinUserName: any = '';
+  loginStatus: Observable<boolean> | undefined;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.isLoggedIn = this.authService.isLoggedIn;
+    this.onChange();
+  }
+
+  onChange(): void {
+    this.loggedinUserName = this.authService.userValue?.fullname;
+    this.loginStatus = this.authService.loginStatus.pipe(map(status => {
+      return status;
+    }));
+  }
+
+  logout() : void {
+    this.authService.logout();
   }
 }

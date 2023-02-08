@@ -1,8 +1,16 @@
-<p-menubar *ngIf="!(isLoggedIn | async) as isLoggedIn">
+<p-menubar *ngIf="!(loginStatus | async) as loginStatus">
   <ng-template pTemplate="start">
     <a aria-current="page" routerLink="">Home</a>
   </ng-template>
   <ng-template pTemplate="end">
     <button type="button" pButton label="Login" icon="pi pi-user" routerLink="login"></button>
+  </ng-template>
+</p-menubar>
+<p-menubar *ngIf="(loginStatus | async) as loginStatus">
+  <ng-template pTemplate="start">
+    <a aria-current="page">Welcome {{loggedinUserName}} </a>
+  </ng-template>
+  <ng-template pTemplate="end">
+    <button type="button" pButton label="Logout" icon="pi pi-user" (click)="logout()"></button>
   </ng-template>
 </p-menubar>

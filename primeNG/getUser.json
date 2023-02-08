@@ -1,8 +1,18 @@
 {
   "data": {
-    "fullname": "test",
-    "email": "test@yopmail.com",
-    "password": "Password1!",
-    "token": "fake_token"
+    "users": [
+      {
+        "fullname": "test",
+        "email": "test@yopmail.com",
+        "password": "Password1!",
+        "token": "fake_token"
+      },
+      {
+        "fullname": "test2",
+        "email": "test2@yopmail.com",
+        "password": "Password2!",
+        "token": "fake_token2"
+      }
+    ]
   }
 }

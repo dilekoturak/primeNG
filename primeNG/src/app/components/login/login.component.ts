@@ -53,8 +53,11 @@ export class LoginComponent implements OnInit {
         .pipe(first())
         .subscribe({
             next: (data) => {
-                localStorage.setItem('user', JSON.stringify(data));
-                this.router.navigate(['/dashboard']);
+                if (data) {
+                  localStorage.setItem('user', JSON.stringify(data));
+                  this.router.navigate(['/dashboard']);
+                }
+                this.message.add({severity:'error', summary:'Service Message', detail: "User not found" });
               },
             error: error => {
               this.message.add({severity:'error', summary:'Service Message', detail: error });

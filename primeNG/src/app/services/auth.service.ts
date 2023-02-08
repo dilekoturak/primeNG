@@ -24,14 +24,19 @@ export class AuthService {
   
   login(fullname: string, email: string, password: string) {      
       return this.http.get<any>(environment.apiUrl)
-          .pipe(map(user => {
-              const newUser = {...user, fullname: fullname};
+          .pipe(map(res => {
+              const usersData = res.users;
+              const user = usersData.find((u:any) => {
+                return u.email == email && u.password == password;
+              })
               
-              if (email == user.email && password == user.password) {
+              if (user) {
+                const newUser = {...user, fullname: fullname};
                 this.userSubject.next(newUser);
                 this.loginStatus.next(true);
+                return newUser;
               }
-              return newUser;
+              return null
           }), catchError(() => {
             return throwError(() => new Error('Something went wrong while logging'));
           }))

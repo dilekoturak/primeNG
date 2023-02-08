@@ -1,4 +1,4 @@
-import { User } from 'src/app/models/user';
+import { MessageService } from 'primeng/api';
 import { AuthService } from '../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -8,7 +8,8 @@ import { first } from 'rxjs/operators';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  providers: [ MessageService ]
 })
 export class LoginComponent implements OnInit {
   submitted: boolean = true;
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, 
               private authService: AuthService,
-              private router: Router) {
+              private router: Router,
+              private message: MessageService) {
                 const user = this.authService.userValue;
                 if (user) {
                   this.router.navigate(['/dashboard']);
@@ -53,9 +55,9 @@ export class LoginComponent implements OnInit {
             next: (data) => {
                 localStorage.setItem('user', JSON.stringify(data));
                 this.router.navigate(['/dashboard']);
-            },
+              },
             error: error => {
-
+              this.message.add({severity:'error', summary:'Service Message', detail: error });
             }
         });
   }

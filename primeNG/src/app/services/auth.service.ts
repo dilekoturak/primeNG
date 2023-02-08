@@ -1,6 +1,6 @@
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, catchError, map, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { User } from '../models/user';
 import { HttpClient } from '@angular/common/http';
@@ -32,7 +32,9 @@ export class AuthService {
                 this.loginStatus.next(true);
               }
               return newUser;
-          }));
+          }), catchError(() => {
+            return throwError(() => new Error('Something went wrong while logging'));
+          }))
   }
 
   logout(): void {

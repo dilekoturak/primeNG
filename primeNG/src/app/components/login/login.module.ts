@@ -1,3 +1,4 @@
+import { ToastModule } from 'primeng/toast';
 import { LoginComponent } from './login.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -18,6 +19,7 @@ import { ButtonModule } from 'primeng/button';
     PasswordModule,
     InputTextModule,
     ButtonModule,
+    ToastModule,
     RouterModule.forChild([
       { path: "", component: LoginComponent }
     ])

@@ -1,4 +1,4 @@
-<p-menubar>
+<p-menubar *ngIf="!(isLoggedIn | async) as isLoggedIn">
   <ng-template pTemplate="start">
     <a aria-current="page" routerLink="">Home</a>
   </ng-template>

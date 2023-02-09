@@ -8,7 +8,7 @@
 </p-menubar>
 <p-menubar *ngIf="(loginStatus | async) as loginStatus">
   <ng-template pTemplate="start">
-    <a aria-current="page">Welcome {{loggedinUserName}} </a>
+    <a aria-current="page">Welcome {{(loggedinUser | async)?.fullname}}</a>
   </ng-template>
   <ng-template pTemplate="end">
     <button type="button" pButton label="Logout" icon="pi pi-user" (click)="logout()"></button>

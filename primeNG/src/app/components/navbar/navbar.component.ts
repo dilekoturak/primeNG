@@ -10,7 +10,7 @@ import { Component, OnInit, DoCheck } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  loggedinUserName: any = '';
+  loggedinUser: Observable<any> | undefined;
   loginStatus: Observable<boolean> | undefined;
 
   constructor(private authService: AuthService) {}
@@ -20,7 +20,9 @@ export class NavbarComponent implements OnInit {
   }
 
   onChange(): void {
-    this.loggedinUserName = this.authService.userValue?.fullname;
+    this.loggedinUser = this.authService.userSubject.pipe(map(user => {
+      return user;
+    }));
     this.loginStatus = this.authService.loginStatus.pipe(map(status => {
       return status;
     }));

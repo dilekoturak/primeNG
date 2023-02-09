@@ -12,7 +12,6 @@ import { first } from 'rxjs/operators';
 })
 export class DashboardComponent implements OnInit {
 
-  loginStatus: Observable<boolean> | undefined;
   constructor(private authService:AuthService, private message: MessageService) {}
 
   ngOnInit(): void {

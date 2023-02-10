@@ -4,22 +4,24 @@ import { LoginModule } from './login/login.module';
 import { HomeModule } from './home/home.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ProgresssSpinnerModule } from './progress-spinner/progress-spinner.module';
 
 @NgModule({
-  declarations: [
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     HomeModule,
     LoginModule,
     NavbarModule,
-    DashboardModule
+    DashboardModule,
+    ProgresssSpinnerModule
   ],
   exports: [
     HomeModule,
     LoginModule,
     NavbarModule,
-    DashboardModule
+    DashboardModule,
+    ProgresssSpinnerModule
   ]
 })
 export class UiModule { }

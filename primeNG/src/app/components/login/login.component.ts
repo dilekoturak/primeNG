@@ -12,7 +12,7 @@ import { first } from 'rxjs/operators';
   providers: [ MessageService ]
 })
 export class LoginComponent implements OnInit {
-  submitted: boolean = true;
+  submitted: boolean = false;
   regex: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
   loginForm!: FormGroup;
 

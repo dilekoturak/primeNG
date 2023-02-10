@@ -1,8 +1,6 @@
 import { AuthService } from 'src/app/services/auth.service';
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { Observable } from 'rxjs';
-import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
